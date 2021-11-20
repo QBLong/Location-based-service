@@ -1,6 +1,7 @@
 package com.example.location_based_service;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         cLocation[] locations=createDummyVariables();
         adapter.setmLocations(locations);
         locationListView.setAdapter(adapter);
-        locationListView.setLayoutManager(new LinearLayoutManager(this));
+        locationListView.setLayoutManager(new GridLayoutManager(this, 2));
 
     }
 
