@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "697923736916",
+    "project_id": "location-based-services-ec8ba",
+    "storage_bucket": "location-based-services-ec8ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697923736916:android:80411a706c37e7212464c1",
+        "android_client_info": {
+          "package_name": "com.example.location_based_service"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "697923736916-4lub0n00ilkb4vfk349rlnnr4d84e3dd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAxhBFu-_8I05pL3CgR66eiYgrj2Nj7Mk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "697923736916-4lub0n00ilkb4vfk349rlnnr4d84e3dd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

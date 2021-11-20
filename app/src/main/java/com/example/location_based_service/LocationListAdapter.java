@@ -1,21 +1,30 @@
 package com.example.location_based_service;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapter.ViewHolder>{
     private LayoutInflater mInflater;
     private cLocation[] mLocations;
+    private Context mContext;
     public LocationListAdapter(Context context) {
+        mContext=context;
         mInflater=LayoutInflater.from(context);
     }
 
@@ -33,7 +42,22 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
             holder.nameView.setText(location.getmName());
             holder.starView.setText(String.valueOf(location.getmNumberOfStar())+"/5");
             holder.imageView.setImageBitmap(location.getmImage());
+
+            holder.itemView.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            processItemClick(location);
+                        }
+                    }
+            );
         }
+    }
+
+    private void processItemClick(cLocation location) {
+        Intent intent=new Intent(mContext, Detail_location.class);
+        // intent.putExtra("location", location);
+        mContext.startActivity(intent);
     }
 
     @Override
