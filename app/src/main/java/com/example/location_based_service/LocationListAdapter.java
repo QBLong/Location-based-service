@@ -3,6 +3,7 @@ package com.example.location_based_service;
 
 import android.content.Context;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapter.ViewHolder>{
     private LayoutInflater mInflater;
     private cLocation[] mLocations;
+    private Context mContext;
     public LocationListAdapter(Context context) {
+        mContext=context;
         mInflater=LayoutInflater.from(context);
     }
 
@@ -33,7 +36,21 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
             holder.nameView.setText(location.getmName());
             holder.starView.setText(String.valueOf(location.getmNumberOfStar())+"/5");
             holder.imageView.setImageBitmap(location.getmImage());
+
+            holder.itemView.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            processItemClick(location);
+                        }
+                    }
+            );
         }
+    }
+
+    private void processItemClick(cLocation location) {
+        Intent intent=new Intent(mContext, Detail_location.class);
+        mContext.startActivity(intent);
     }
 
     @Override

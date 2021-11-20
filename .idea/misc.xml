@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/Users/DELL/Desktop/Location-based-service/app/src/main/res/drawable/border_list_item.xml" value="0.2866666666666667" />
         <entry key="..\:/Users/DELL/Desktop/Location-based-service/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/DELL/Desktop/Location-based-service/app/src/main/res/layout/item_view_layout.xml" value="0.36666666666666664" />
+=======
+        <entry key="..\:/Users/ASUS/ckadroid/Location-based-service/app/src/main/res/layout/activity_detail_location.xml" value="0.2713541666666667" />
+        <entry key="..\:/Users/ASUS/ckadroid/Location-based-service/app/src/main/res/layout/activity_main.xml" value="0.14166666666666666" />
+>>>>>>> bf3769b1fdf4aa5768f2166622d42c91f1d37207
       </map>
     </option>
   </component>
