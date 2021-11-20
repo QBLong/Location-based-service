@@ -19,13 +19,31 @@
         android:id="@+id/text_name"
         android:textColor="@color/black"
         android:paddingLeft="5dp"/>
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/text_star"
-        android:layout_gravity="right"
-        android:gravity="right"
-        android:textColor="@color/black"
-        android:paddingLeft="5dp"/>
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6" />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_weight="1"
+            android:src="@drawable/star"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_star"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:textColor="@color/black"
+            android:layout_weight="2"/>
+    </LinearLayout>
+
 
 </LinearLayout>
