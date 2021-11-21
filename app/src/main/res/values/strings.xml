@@ -5,5 +5,10 @@
     <string name="feature_in4">Mô tả</string>
     <string name="feature_contact">Liên hệ</string>
     <string name="feature_comment">Bình luận</string>
+    <string name="add_location">Add a location</string>
+    <string name="see_locations">See all locations</string>
+    <string name="add_more_image">Add more image</string>
+    <string name="location_name">Location name:</string>
+    <string name="submit">submit</string>
 
 </resources>

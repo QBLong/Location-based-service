@@ -13,13 +13,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapter.ViewHolder>{
     private LayoutInflater mInflater;
-    private cLocation[] mLocations;
+    private List<cLocation> mLocations;
     private Context mContext;
     public LocationListAdapter(Context context) {
         mContext=context;
         mInflater=LayoutInflater.from(context);
+
+        mLocations=new ArrayList<>();
     }
 
     @NonNull
@@ -32,10 +37,12 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if(mLocations!=null){
-            cLocation location=mLocations[position];
+            cLocation location=mLocations.get(position);
             holder.nameView.setText(location.getmName());
             holder.starView.setText(String.valueOf(location.getmNumberOfStar())+"/5");
-            holder.imageView.setImageBitmap(location.getmImage());
+
+            new DownloadImageTask(holder.imageView).execute(location.mUrls.get(0));
+
 
             holder.itemView.setOnClickListener(
                     new View.OnClickListener() {
@@ -55,10 +62,10 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
 
     @Override
     public int getItemCount() {
-        return mLocations.length;
+        return mLocations.size();
     }
 
-    public void setmLocations(cLocation[] mLocations) {
+    public void setmLocations(List<cLocation> mLocations) {
         this.mLocations = mLocations;
     }
 
