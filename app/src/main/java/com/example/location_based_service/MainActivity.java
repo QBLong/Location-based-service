@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected int[] CimageId={R.drawable.a, R.drawable.b, R.drawable.c};
     protected String[] Cname={"Saigon University", "NOWZONE Fashion Mall", "Pizza 4P's Vo Van Kiet"};
     protected double[][] Ccoop={{10.7596667, 106.6807954}, {10.7596667, 106.6807954}, {10.7596667, 106.6807954}};
-    protected String[] Cdetail={"Heye","Supp","Let's Catchup"};
+    protected String[] Cdetail={"hello","Supp","Let's Catchup"};
     protected String[] Cemail={"8:45 pm","9:00 am","7:34 pm"};
     protected String[] CphoneNo= {"7656610000","9999043232","7834354323"};
 
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        Cdetail[0]=getString(R.string.detail);
         // Setup recyclerview
         RecyclerView locationListView = (RecyclerView) findViewById(R.id.location_list);
         LocationListAdapter adapter=new LocationListAdapter(this);
@@ -59,5 +60,8 @@ public class MainActivity extends AppCompatActivity {
             res[i].setmImage(bmp);
         }
         return res;
+    }
+
+    public void onClick(View view) {
     }
 }
