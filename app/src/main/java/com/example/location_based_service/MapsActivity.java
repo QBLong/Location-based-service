@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -40,6 +41,8 @@ public class MapsActivity extends FragmentActivity implements
     private LatLng startLatLng;
     private LatLng destLatLng;
     private LatLng myPosition = null;
+    private Location lastLocation;
+    private SupportMapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +52,7 @@ public class MapsActivity extends FragmentActivity implements
         setContentView(binding.getRoot());
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -62,13 +65,6 @@ public class MapsActivity extends FragmentActivity implements
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
 
@@ -76,22 +72,12 @@ public class MapsActivity extends FragmentActivity implements
         mMap.setOnMapClickListener(this);
         mMap.setOnMapLongClickListener(this);
 
+        Intent intent = getIntent();
+        destLatLng = new LatLng(intent.getDoubleExtra("latitude", 0),
+                intent.getDoubleExtra("longitude", 0));
+
         findYourPosition();
 
-        if (myPosition == null) {
-            myPosition = new LatLng(10.762912, 106.682172);
-        }
-
-
-        CameraPosition point = new CameraPosition.Builder()
-                .target(myPosition)
-                .zoom(15)
-                .bearing(90)
-                .tilt(30)
-                .build();
-
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(point));
-        mapDirectionHelper = new MapDirectionHelper(mMap, this);
     }
 
     @Override
@@ -166,7 +152,31 @@ public class MapsActivity extends FragmentActivity implements
                         if(location!=null){
                             // Biến location là chứa địa điểm ấy
                             // gọi location.getLattitude(), location.getLongitude()
+                            lastLocation = location;
                             myPosition = new LatLng(location.getLatitude(), location.getLongitude());
+                            mapFragment.getMapAsync(new OnMapReadyCallback() {
+                                @Override
+                                public void onMapReady(@NonNull GoogleMap googleMap) {
+                                    mMap = googleMap;
+                                    startLatLng = myPosition;
+                                    System.out.println("This is new startLatLng: " + startLatLng);
+                                    MarkerOptions markerOptions = new MarkerOptions()
+                                            .position(startLatLng)
+                                            .title("My position")
+                                            .visible(true)
+                                            ;
+                                    mMap.addMarker(markerOptions);
+                                    CameraPosition point = new CameraPosition.Builder()
+                                            .target(startLatLng)
+                                            .zoom(15)
+                                            .bearing(90)
+                                            .tilt(30)
+                                            .build();
+
+                                    mMap.animateCamera(CameraUpdateFactory.newCameraPosition(point));
+                                    mapDirectionHelper = new MapDirectionHelper(mMap, getApplicationContext());
+                                }
+                            });
                         }
 
                     }
