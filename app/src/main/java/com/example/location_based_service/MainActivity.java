@@ -20,11 +20,19 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
+    protected int[] CimageId={R.drawable.a, R.drawable.b, R.drawable.c};
+    protected String[] Cname={"Saigon University", "NOWZONE Fashion Mall", "Pizza 4P's Vo Van Kiet"};
+    protected double[][] Ccoop={{10.7596667, 106.6807954}, {10.7596667, 106.6807954}, {10.7596667, 106.6807954}};
+    protected String[] Cdetail={"Heye","Supp","Let's Catchup"};
+    protected String[] Cemail={"8:45 pm","9:00 am","7:34 pm"};
+    protected String[] CphoneNo= {"7656610000","9999043232","7834354323"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         // Setup recyclerview
         RecyclerView locationListView = (RecyclerView) findViewById(R.id.location_list);
@@ -37,22 +45,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private cLocation[] createDummyVariables() {
-        cLocation[] res=new cLocation[15];
-        for(int i=0;i<5;i++){
+        cLocation[] res=new cLocation[3];
+        for(int i=0;i<3;i++){
             res[i]=new cLocation();
-            String name="Notre Dame SaiGon "+String.valueOf(i);
+            String name=Cname[i];
             res[i].setmName(name);
+            res[i].setmEmail(Cemail[i]);
+            res[i].setmImageID(CimageId[i]);
+            res[i].setmPhone(CphoneNo[i]);
+            res[i].setmDetail(Cdetail[i]);
             res[i].setmNumberOfStar(5);
-            Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.notre_dame_sai_gon);
+            Bitmap bmp= BitmapFactory.decodeResource(getResources(), CimageId[i]);
             res[i].setmImage(bmp);
-        }
-        for(int i=0;i<10;i++){
-            res[i+5]=new cLocation();
-            String name="HCMUS SaiGon "+String.valueOf(i);
-            res[i+5].setmName(name);
-            res[i+5].setmNumberOfStar(5);
-            Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.hcmus);
-            res[i+5].setmImage(bmp);
         }
         return res;
     }

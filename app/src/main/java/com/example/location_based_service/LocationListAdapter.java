@@ -6,6 +6,7 @@ import android.content.Context;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.Serializable;
 
 public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapter.ViewHolder>{
     private LayoutInflater mInflater;
@@ -56,7 +59,11 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
 
     private void processItemClick(cLocation location) {
         Intent intent=new Intent(mContext, Detail_location.class);
-        // intent.putExtra("location", location);
+        intent.putExtra("Detail", location.getmDetail());
+        intent.putExtra("Email", location.getmEmail());
+        intent.putExtra("Phone", location.getmPhone());
+        intent.putExtra("image", location.getmImageID());
+
         mContext.startActivity(intent);
     }
 
