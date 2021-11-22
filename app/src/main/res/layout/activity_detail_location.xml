@@ -9,13 +9,6 @@
     tools:context=".MainActivity">
 
 
-    <!--<ImageView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/mainImage"
-        android:src="@drawable/khtn"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"/>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -62,8 +55,8 @@
             android:onClick="onClick"
             android:scaleType="fitCenter"
             android:src="@drawable/chat" />
-
         <ImageButton
+            android:id="@+id/direct"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="50dp"
@@ -86,9 +79,9 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/mainName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/writer_information"
                 android:textSize="15pt"
                 android:textStyle="bold"/>
 
@@ -109,6 +102,7 @@
                 android:id="@+id/in4Description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textIsSelectable="true"
                 android:textSize="10pt" />
 
             <TextView
@@ -125,6 +119,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
                 android:textSize="10pt"
+                android:textIsSelectable="true"
                 app:drawableLeftCompat="@drawable/ic_call" />
             <TextView
                 android:id="@+id/in4Email"
@@ -132,24 +127,27 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
                 android:textSize="10pt"
+                android:textIsSelectable="true"
                 app:drawableLeftCompat="@drawable/ic_email" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textComent"
+                android:id="@+id/textComment"
                 android:text="@string/feature_comment"
                 android:textSize="15pt"
                 android:textStyle="bold" />
+
             <Button
-                android:layout_width="wrap_content"
+                android:id="@+id/readComment"
+                android:layout_width="248dp"
                 android:layout_height="wrap_content"
-                android:text="@string/read_comment"
-                android:id="@+id/readComment"/>
+                android:text="@string/read_comment" />
+
             <Button
-                android:layout_width="wrap_content"
+                android:id="@+id/addComment"
+                android:layout_width="178dp"
                 android:layout_height="wrap_content"
-                android:text="@string/add_comment"
-                android:id="@+id/addComment"/>
+                android:text="@string/add_comment" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab"

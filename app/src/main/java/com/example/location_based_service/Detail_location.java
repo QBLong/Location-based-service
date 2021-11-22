@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +30,7 @@ public class Detail_location extends AppCompatActivity {
     private TextView tDetail;
     private TextView tPhone;
     private TextView tEmail;
+    private TextView tName;
     private ScrollView sc;
     private ImageView image;
 
@@ -51,9 +53,6 @@ public class Detail_location extends AppCompatActivity {
     locationImageDAO mImageDAO;
     LocationImageAdapter adapter;
     RecyclerView recyclerView;
-
-    String dt;
-
 
     String locationName;
 
@@ -132,25 +131,21 @@ public class Detail_location extends AppCompatActivity {
             userEmail= intent.getStringExtra("userEmail");
             userName=intent.getStringExtra("userName");
 
-            dt = intent.getStringExtra("Detail");
-            String p = intent.getStringExtra("Phone");
-            String e = intent.getStringExtra("Email");
-
-            lattitude=intent.getDoubleExtra("lattitude", 0);
-            longitude=intent.getDoubleExtra("longitude", 0);
-
-
             tDetail=findViewById(R.id.in4Description);
-            tDetail.setText(dt);
+            tName=findViewById(R.id.mainName);
             tPhone=findViewById(R.id.in4Phone);
-            tPhone.setText(p);
-            tPhone.setFocusable(true);
             tEmail=findViewById(R.id.in4Email);
-            tEmail.setText(e);
             bDetail=findViewById(R.id.detail);
             bContact=findViewById(R.id.contact);
             bComment=findViewById(R.id.comment);
             sc=findViewById((R.id.scrollView));
+
+            lattitude=intent.getDoubleExtra("lattitude",0);
+            longitude=intent.getDoubleExtra("longitude",0);
+            tName.setText(intent.getStringExtra("locationName"));
+            tDetail.setText(intent.getStringExtra("Detail"));
+            tPhone.setText(intent.getStringExtra("Phone"));
+            tEmail.setText(intent.getStringExtra("Email"));
             userInfo=(TextView) findViewById(R.id.InfoWriter);
 
             locationName=intent.getStringExtra("locationName");
@@ -206,12 +201,17 @@ public class Detail_location extends AppCompatActivity {
             sc.post(new Runnable() {
                 @Override
                 public void run() {
-                    TextView a=findViewById(R.id.textComent);
+                    TextView a=findViewById(R.id.textComment);
                     sc.scrollTo(0, (int)a.getY());;
                 }
             });
         }
-        else{
+        else if (v==tPhone){
+            String phone = (String) tPhone.getText();
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.fromParts("tel", phone, null));
+            this.startActivity(intent);
+        }
+        else if (v==bDirect){
             openMap();
         }
     }
@@ -221,7 +221,7 @@ public class Detail_location extends AppCompatActivity {
         openMapIntent.putExtra("latitude", lattitude);
         openMapIntent.putExtra("longitude", longitude);
         openMapIntent.putExtra("name", locationName);
-        openMapIntent.putExtra("description", dt);
+        openMapIntent.putExtra("description", tDetail.getText());
         startActivity(openMapIntent);
     }
 }
