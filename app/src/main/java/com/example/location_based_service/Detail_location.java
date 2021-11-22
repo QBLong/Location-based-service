@@ -29,6 +29,7 @@ public class Detail_location extends AppCompatActivity {
     private TextView tDetail;
     private TextView tPhone;
     private TextView tEmail;
+    private TextView tName;
     private ScrollView sc;
     private ImageView image;
     private ImageButton bDetail;
@@ -127,13 +128,14 @@ public class Detail_location extends AppCompatActivity {
             String dt = intent.getStringExtra("Detail");
             String p = intent.getStringExtra("Phone");
             String e = intent.getStringExtra("Email");
-
+            String n = intent.getStringExtra("locationName");
 
             tDetail=findViewById(R.id.in4Description);
+            tName=findViewById(R.id.mainName);
+            tName.setText(n);
             tDetail.setText(dt);
             tPhone=findViewById(R.id.in4Phone);
             tPhone.setText(p);
-            tPhone.setFocusable(true);
             tEmail=findViewById(R.id.in4Email);
             tEmail.setText(e);
             bDetail=findViewById(R.id.detail);
@@ -141,8 +143,6 @@ public class Detail_location extends AppCompatActivity {
             bComment=findViewById(R.id.comment);
             sc=findViewById((R.id.scrollView));
             userInfo=(TextView) findViewById(R.id.InfoWriter);
-
-            locationName=intent.getStringExtra("locationName");
 
             if(date!=null) {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -188,10 +188,11 @@ public class Detail_location extends AppCompatActivity {
             sc.post(new Runnable() {
                 @Override
                 public void run() {
-                    TextView a=findViewById(R.id.textComent);
+                    TextView a=findViewById(R.id.textComment);
                     sc.scrollTo(0, (int)a.getY());;
                 }
             });
         }
     }
+
 }

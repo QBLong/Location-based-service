@@ -40,12 +40,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         addLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(MyGlobal.userEmail==null){
+                /*if(MyGlobal.userEmail==null){
                     Toast.makeText(
                             MainActivity.this, "Please sign in first", Toast.LENGTH_LONG
                     ).show();
                     return;
-                }
+                }*/
                 Intent addLocationIntent = new Intent(MainActivity.this, AddLocation.class);
                 addLocationIntent.putExtra("do", "choosePos");
                 startActivity(addLocationIntent);
@@ -55,12 +55,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         seeLocations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(MyGlobal.userEmail==null){
+                /*if(MyGlobal.userEmail==null){
                     Toast.makeText(
                             MainActivity.this, "Please sign in first", Toast.LENGTH_LONG
                     ).show();
                     return;
-                }
+                }*/
                 Intent seeLocationsIntent = new Intent(MainActivity.this, SeeLocations.class);
                 startActivity(seeLocationsIntent);
             }
