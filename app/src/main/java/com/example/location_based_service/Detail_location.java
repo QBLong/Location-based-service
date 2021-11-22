@@ -50,7 +50,7 @@ public class Detail_location extends AppCompatActivity {
 
     String locationName;
 
-    Button readCommentButton;
+    Button readCommentButton, addCommentButton;
 
 
 
@@ -75,6 +75,17 @@ public class Detail_location extends AppCompatActivity {
                     }
                 }
         );
+        addCommentButton=(Button) findViewById(R.id.addComment);
+
+        addCommentButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        processComment();
+                    }
+                }
+        );
+
         recyclerView=(RecyclerView) findViewById(R.id.recyclerViewImage);
 
 
@@ -116,9 +127,8 @@ public class Detail_location extends AppCompatActivity {
             String dt = intent.getStringExtra("Detail");
             String p = intent.getStringExtra("Phone");
             String e = intent.getStringExtra("Email");
-            int idImage = intent.getIntExtra("image",R.drawable.a);
-            // image=findViewById(R.id.mainImage);
-            // image.setImageResource(idImage);
+
+
             tDetail=findViewById(R.id.in4Description);
             tDetail.setText(dt);
             tPhone=findViewById(R.id.in4Phone);

@@ -21,5 +21,7 @@
     <string name="number_of_star">Number of star:</string>
     <string name="submit_button">Submit</string>
     <string name="ok"> vào lúc </string>
+    <string name="add_comment">Add comment</string>
+    <string name="read_comment">Read comment</string>
 
 </resources>

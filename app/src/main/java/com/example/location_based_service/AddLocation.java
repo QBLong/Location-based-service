@@ -145,6 +145,7 @@ public class AddLocation extends AppCompatActivity {
         location.setUserEmail(MyGlobal.userEmail);
         location.setUserName(MyGlobal.userName);
         location.setDate(new Date());
+        location.setmNumberOfVote(1);
 
         mDAO.addLocation(location);
         finish();
