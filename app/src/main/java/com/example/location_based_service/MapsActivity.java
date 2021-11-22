@@ -87,6 +87,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 intent.getDoubleExtra("longitude", 0));
 
         findYourPosition();
+
+
     }
 
 
@@ -190,6 +192,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             mMap.addMarker(markerOptions);
                             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(point));
                             mapDirectionHelper = new MapDirectionHelper(mMap, getApplicationContext());
+                            mapDirectionHelper.startDirection(startLatLng, destLatLng);
 
                             /*mapFragment.getMapAsync(new OnMapReadyCallback() {
                                 @Override
@@ -237,7 +240,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public boolean onMarkerClick(@NonNull Marker marker) {
         String doWhat = getIntent().getStringExtra("do");
         System.out.println(doWhat);
-        if(doWhat.equals("choosePos")){
+        if(doWhat!=null && doWhat.equals("choosePos")){
             Intent replyIntent=new Intent(this, AddLocation.class);
             replyIntent.putExtra("lat", marker.getPosition().latitude);
             replyIntent.putExtra("long", marker.getPosition().longitude);
@@ -246,5 +249,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return false;
         }
         return false;
+
+
     }
 }

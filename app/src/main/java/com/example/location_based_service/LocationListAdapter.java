@@ -83,6 +83,8 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
         intent.putExtra("userEmail", location.getUserEmail());
         intent.putExtra("date", location.getDate());
         intent.putExtra("locationName", location.getmName());
+        intent.putExtra("lattitude", location.getLattitude());
+        intent.putExtra("longitude", location.getLongitude());
 
         mContext.startActivity(intent);
     }

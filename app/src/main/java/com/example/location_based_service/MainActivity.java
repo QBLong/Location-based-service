@@ -37,6 +37,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         setContentView(R.layout.activity_main);
 
         assignGlobalVariables();
+
+        MyGlobal.userEmail="Minhbaodinh0808@gmail.com";
+        MyGlobal.userName="Minh Bao Dinh";
+
         addLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

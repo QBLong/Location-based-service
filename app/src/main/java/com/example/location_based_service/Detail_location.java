@@ -31,9 +31,14 @@ public class Detail_location extends AppCompatActivity {
     private TextView tEmail;
     private ScrollView sc;
     private ImageView image;
+
+
     private ImageButton bDetail;
     private ImageButton bContact;
     private ImageButton bComment;
+    private ImageButton bDirect;
+
+
     ArrayList<String> urls;
     ArrayList<Bitmap> bitmaps;
     List<cComment> comments;
@@ -51,7 +56,7 @@ public class Detail_location extends AppCompatActivity {
     String locationName;
 
     Button readCommentButton, addCommentButton;
-
+    double lattitude, longitude;
 
 
     @Override
@@ -61,8 +66,6 @@ public class Detail_location extends AppCompatActivity {
 
         bitmaps=new ArrayList<>();
         comments=new ArrayList<>();
-
-
 
         readCommentButton=(Button) findViewById(R.id.readComment);
         readCommentButton.setOnClickListener(
@@ -75,8 +78,8 @@ public class Detail_location extends AppCompatActivity {
                     }
                 }
         );
-        addCommentButton=(Button) findViewById(R.id.addComment);
 
+        addCommentButton=(Button) findViewById(R.id.addComment);
         addCommentButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -86,7 +89,9 @@ public class Detail_location extends AppCompatActivity {
                 }
         );
 
+
         recyclerView=(RecyclerView) findViewById(R.id.recyclerViewImage);
+        // bDirect=findViewById(R.id.direct);
 
 
         adapter=new LocationImageAdapter(this, R.layout.another_item_layout);
@@ -128,6 +133,9 @@ public class Detail_location extends AppCompatActivity {
             String p = intent.getStringExtra("Phone");
             String e = intent.getStringExtra("Email");
 
+            lattitude=intent.getDoubleExtra("lattitude", 0);
+            longitude=intent.getDoubleExtra("longitude", 0);
+
 
             tDetail=findViewById(R.id.in4Description);
             tDetail.setText(dt);
@@ -151,7 +159,14 @@ public class Detail_location extends AppCompatActivity {
                 userInfo.setText("Written by "+userName+" at "+time);
             }
 
-
+            tPhone.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent phoneIntent=new Intent();
+                        }
+                    }
+            );
         }
     }
 
@@ -175,7 +190,7 @@ public class Detail_location extends AppCompatActivity {
                 }
             });
         }
-        if (v==bContact){
+        else if (v==bContact){
             sc.post(new Runnable() {
                 @Override
                 public void run() {
@@ -184,7 +199,7 @@ public class Detail_location extends AppCompatActivity {
                 }
             });
         }
-        if (v==bComment){
+        else if (v==bComment){
             sc.post(new Runnable() {
                 @Override
                 public void run() {
@@ -193,5 +208,15 @@ public class Detail_location extends AppCompatActivity {
                 }
             });
         }
+        else{
+            openMap();
+        }
+    }
+
+    private void openMap() {
+        Intent openMapIntent=new Intent(this, MapsActivity.class);
+        openMapIntent.putExtra("latitude", lattitude);
+        openMapIntent.putExtra("longitude", longitude);
+        startActivity(openMapIntent);
     }
 }
