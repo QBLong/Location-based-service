@@ -14,6 +14,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -91,26 +92,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent intent = getIntent();
 
 
+        if (intent != null && intent.getExtras() != null) {
+            double lat = intent.getExtras().getDouble("lattitude", 0);
+            double lng = intent.getExtras().getDouble("longitude", 0);
 
-        if(intent!=null && intent.getExtras()!=null){
-            double lat=intent.getExtras().getDouble("lattitude", 0);
-            double lng=intent.getExtras().getDouble("longitude", 0);
+            destLatLng = new LatLng(lat, lng);
+            locationName = intent.getExtras().getString("name", "");
 
-            destLatLng=new LatLng(lat, lng);
-            locationName=intent.getExtras().getString("name", "");
-
-            locationDescription=intent.getExtras().getString("description", "");
+            locationDescription = intent.getExtras().getString("description", "");
         }
-
 
 
         findYourPosition();
 
-        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+        /* mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Nullable
             @Override
             public View getInfoContents(@NonNull Marker marker) {
-                View v = getLayoutInflater().inflate(R.layout.infowindowlayout, null);
+                View v = getLayoutInflater().inflate(R.layout., null);
 
                 LatLng latLng = marker.getPosition();
 
@@ -128,7 +127,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
 
 
-        }
+        });*/
+
+
+    }
 
 
 
