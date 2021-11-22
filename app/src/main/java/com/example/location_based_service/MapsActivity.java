@@ -1,6 +1,7 @@
 package com.example.location_based_service;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -11,6 +12,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -43,6 +46,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LatLng myPosition = null;
     private Location lastLocation;
     private SupportMapFragment mapFragment;
+
+    private String locationName;
+    private String locationDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,13 +89,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(this);
 
         Intent intent = getIntent();
-        destLatLng = new LatLng(intent.getDoubleExtra("latitude", 0),
-                intent.getDoubleExtra("longitude", 0));
+
+
+
+        if(intent!=null && intent.getExtras()!=null){
+            double lat=intent.getExtras().getDouble("lattitude", 0);
+            double lng=intent.getExtras().getDouble("longitude", 0);
+
+            destLatLng=new LatLng(lat, lng);
+            locationName=intent.getExtras().getString("name", "");
+
+            locationDescription=intent.getExtras().getString("description", "");
+        }
+
+
 
         findYourPosition();
 
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Nullable
+            @Override
+            public View getInfoContents(@NonNull Marker marker) {
+                View v = getLayoutInflater().inflate(R.layout.infowindowlayout, null);
 
-    }
+                LatLng latLng = marker.getPosition();
+
+                ImageView im = (ImageView) v.findViewById(R.id.imageView1);
+                TextView tv1 = (TextView) v.findViewById(R.id.textView1);
+                TextView tv2 = (TextView) v.findViewById(R.id.textView2);
+                String title = marker.getTitle();
+                String informations = marker.getSnippet();
+
+                tv1.setText(title);
+                tv2.setText(informations);
+
+
+                return v;
+            }
+
+
+        }
 
 
 

@@ -52,8 +52,11 @@ public class Detail_location extends AppCompatActivity {
     LocationImageAdapter adapter;
     RecyclerView recyclerView;
 
+    String dt;
+
 
     String locationName;
+
 
     Button readCommentButton, addCommentButton;
     double lattitude, longitude;
@@ -129,7 +132,7 @@ public class Detail_location extends AppCompatActivity {
             userEmail= intent.getStringExtra("userEmail");
             userName=intent.getStringExtra("userName");
 
-            String dt = intent.getStringExtra("Detail");
+            dt = intent.getStringExtra("Detail");
             String p = intent.getStringExtra("Phone");
             String e = intent.getStringExtra("Email");
 
@@ -217,6 +220,8 @@ public class Detail_location extends AppCompatActivity {
         Intent openMapIntent=new Intent(this, MapsActivity.class);
         openMapIntent.putExtra("latitude", lattitude);
         openMapIntent.putExtra("longitude", longitude);
+        openMapIntent.putExtra("name", locationName);
+        openMapIntent.putExtra("description", dt);
         startActivity(openMapIntent);
     }
 }
