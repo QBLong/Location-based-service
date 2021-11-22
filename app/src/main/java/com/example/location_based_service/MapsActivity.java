@@ -95,7 +95,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapClick(LatLng latLng) {
         String doWhat = getIntent().getStringExtra("do");
         System.out.println(doWhat);
-        if(doWhat.equals("choosePos")){
+        if(doWhat!=null && doWhat.equals("choosePos")){
             Intent replyIntent=new Intent(this, AddLocation.class);
             replyIntent.putExtra("lat", latLng.latitude);
             replyIntent.putExtra("long", latLng.longitude);
