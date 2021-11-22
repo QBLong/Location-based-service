@@ -2,11 +2,13 @@ package com.example.location_based_service;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Date;
 
@@ -24,15 +26,23 @@ public class AddCommentActivity extends AppCompatActivity {
         assignGlobalVariables();
         submit.setOnClickListener(
                 new View.OnClickListener() {
+                    @SuppressLint("ResourceType")
                     @Override
                     public void onClick(View view) {
+                        int numberOfStar=Integer.parseInt(star.getText().toString());
+                        if(numberOfStar>5 || numberOfStar<0) {
+                            Toast.makeText(
+                                    AddCommentActivity.this, R.id.numberOfStar, Toast.LENGTH_LONG
+                            ).show();
+                            return;
+                        }
                         cComment comment=new cComment();
                         comment.setmLocation(locationName);
                         comment.setmContent(content.getText().toString());
                         comment.setDate(new Date());
                         comment.setmUserName(MyGlobal.userName);
                         comment.setmUserEmail(MyGlobal.userEmail);
-                        comment.setmNumberOfStar(Integer.valueOf(star.getText().toString()));
+                        comment.setmNumberOfStar(numberOfStar);
 
                         mCommentDAO.addComment(comment);
 

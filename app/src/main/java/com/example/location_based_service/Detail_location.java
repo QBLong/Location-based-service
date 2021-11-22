@@ -93,7 +93,7 @@ public class Detail_location extends AppCompatActivity {
 
 
         recyclerView=(RecyclerView) findViewById(R.id.recyclerViewImage);
-        // bDirect=findViewById(R.id.direct);
+        bDirect=findViewById(R.id.direct);
 
 
         adapter=new LocationImageAdapter(this, R.layout.another_item_layout);
@@ -211,14 +211,14 @@ public class Detail_location extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_CALL, Uri.fromParts("tel", phone, null));
             this.startActivity(intent);
         }
-        else if (v==bDirect){
+        else {
             openMap();
         }
     }
 
     private void openMap() {
         Intent openMapIntent=new Intent(this, MapsActivity.class);
-        openMapIntent.putExtra("latitude", lattitude);
+        openMapIntent.putExtra("lattitude", lattitude);
         openMapIntent.putExtra("longitude", longitude);
         openMapIntent.putExtra("name", locationName);
         openMapIntent.putExtra("description", tDetail.getText());
