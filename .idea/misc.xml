@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Location-based_service/app/src/main/res/drawable/my_border.xml" value="0.15104166666666666" />
+        <entry key="..\:/Location-based_service/app/src/main/res/layout/activity_main.xml" value="0.13802083333333334" />
         <entry key="..\:/Location-based_service/app/src/main/res/layout/activity_maps.xml" value="0.1" />
+        <entry key="..\:/Location-based_service/app/src/main/res/layout/infowindowlayout.xml" value="0.13489583333333333" />
       </map>
     </option>
   </component>

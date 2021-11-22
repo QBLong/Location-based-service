@@ -1,6 +1,7 @@
 package com.example.location_based_service;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -8,10 +9,15 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.location_based_service.databinding.ActivityMapsBinding;
@@ -43,6 +49,11 @@ public class MapsActivity extends FragmentActivity implements
     private LatLng myPosition = null;
     private Location lastLocation;
     private SupportMapFragment mapFragment;
+    private int markerclicked = 0;
+    private String locationName;
+    private String locationDescription;
+    private ImageView locationImage;
+    private Bitmap _imv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,11 +84,65 @@ public class MapsActivity extends FragmentActivity implements
         mMap.setOnMapLongClickListener(this);
 
         Intent intent = getIntent();
-        destLatLng = new LatLng(intent.getDoubleExtra("latitude", 0),
-                intent.getDoubleExtra("longitude", 0));
+        if (intent != null && intent.getExtras() != null) {
+            double lat = intent.getExtras().getDouble("latitude", 0);
+            double lng = intent.getExtras().getDouble("longitude", 0);
+            destLatLng = new LatLng(lat, lng);
+            locationName = intent.getExtras().getString("name", "");
+            locationDescription = intent.getExtras().getString("description", "");
+            if (intent.hasExtra("byteArray")) {
+                _imv = BitmapFactory.decodeByteArray(
+                        intent.getByteArrayExtra("byteArray"),
+                        0,
+                        intent.getByteArrayExtra("byteArray").length
+                );
+                locationImage.setImageBitmap(_imv);
+            }
+        }
 
         findYourPosition();
 
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Nullable
+            @Override
+            public View getInfoContents(@NonNull Marker marker) {
+                View v = getLayoutInflater().inflate(R.layout.infowindowlayout, null);
+
+                LatLng latLng = marker.getPosition();
+
+                ImageView im = (ImageView) v.findViewById(R.id.imageView1);
+                TextView tv1 = (TextView) v.findViewById(R.id.textView1);
+                TextView tv2 = (TextView) v.findViewById(R.id.textView2);
+                String title = marker.getTitle();
+                String informations = marker.getSnippet();
+
+                tv1.setText(title);
+                tv2.setText(informations);
+
+//                if(onMarkerClick(marker)==true && markerclicked==1){
+//                    im.setImageResource(R.drawable.common_full_open_on_phone);
+//                }
+
+
+                return v;
+            }
+
+            @Nullable
+            @Override
+            public View getInfoWindow(@NonNull Marker marker) {
+                return null;
+            }
+        });
+
+    }
+
+    private boolean onMarkerClick(Marker marker) {
+        if (marker.equals(myPosition))
+        {
+            markerclicked=1;
+            return true;
+        }
+        return false;
     }
 
     @Override
