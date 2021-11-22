@@ -88,6 +88,18 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/writer_information"
+                android:textSize="15pt"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/InfoWriter"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="15pt"
                 android:id="@+id/textDetail"
@@ -130,6 +142,21 @@
                 android:text="@string/feature_comment"
                 android:textSize="15pt"
                 android:textStyle="bold" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Read comment"
+                android:id="@+id/readComment"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:src="@drawable/ic_baseline_add_comment_24"
+                android:contentDescription="@string/submit"
+                android:layout_marginBottom="70dp"
+                android:layout_marginRight="20dp"/>
 
         </LinearLayout>
     </ScrollView>

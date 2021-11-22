@@ -1,21 +1,64 @@
 package com.example.location_based_service;
 
 
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class cLocation {
 
     public String mName;
     public ArrayList<String> mUrls;
-    public float mNumberOfStar;
+    public long mNumberOfStar;
+    public long mNumberOfVote;
     public double lattitude;
     public double longitude;
     private int mImageID;
     private String mDetail;
     private String mPhone;
     private String mEmail;
+    Date date;
+
+    public void setmNumberOfStar(long mNumberOfStar) {
+        this.mNumberOfStar = mNumberOfStar;
+    }
+
+    public long getmNumberOfVote() {
+        return mNumberOfVote;
+    }
+
+    public void setmNumberOfVote(long mNumberOfVote) {
+        this.mNumberOfVote = mNumberOfVote;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
     private String[] mComment;
     private double[] mCoop;
+    private String userName;
+    private String userEmail;
 
 
 
@@ -40,20 +83,17 @@ public class cLocation {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
-    public void setmNumberOfStar(float mNumberOfStar) {
-        this.mNumberOfStar = mNumberOfStar;
-    }
     public void setmName(String mName) {
         this.mName = mName;
     }
-    public cLocation(String mName, float mNumberOfStar) {
+    public cLocation(String mName, long mNumberOfStar) {
         this.mName = mName;
         this.mNumberOfStar = mNumberOfStar;
     }
     public String getmName() {
         return mName;
     }
-    public float getmNumberOfStar() {
+    public long getmNumberOfStar() {
         return mNumberOfStar;
     }
     public cLocation(){

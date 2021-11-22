@@ -53,7 +53,9 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
         if(mLocations!=null){
             cLocation location=mLocations.get(position);
             holder.nameView.setText(location.getmName());
-            holder.starView.setText(String.valueOf(location.getmNumberOfStar())+"/5");
+            float star=(float)location.getmNumberOfStar()/ location.getmNumberOfVote();
+
+            holder.starView.setText(String.valueOf(star)+"/5");
 
             if(mImages.size()>position) holder.imageView.setImageBitmap(mImages.get(position));
 
@@ -77,7 +79,10 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
         intent.putExtra("Phone", location.getmPhone());
         intent.putExtra("image", location.getmImageID());
         intent.putStringArrayListExtra("urls", location.mUrls);
-        intent.putExtra("Detail", location.getmDetail());
+        intent.putExtra("userName", location.getUserName());
+        intent.putExtra("userEmail", location.getUserEmail());
+        intent.putExtra("date", location.getDate());
+        intent.putExtra("locationName", location.getmName());
 
         mContext.startActivity(intent);
     }

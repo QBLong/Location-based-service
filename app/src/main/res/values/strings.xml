@@ -16,5 +16,10 @@
     <string name="enter_your_review_here">Enter your review here</string>
     <string name="enter_your_phone_number">Enter your phone number</string>
     <string name="enter_your_email_address">Enter your email address</string>
+    <string name="writer_information">Writer information</string>
+    <string name="enter_your_comment">Enter your comment</string>
+    <string name="number_of_star">Number of star:</string>
+    <string name="submit_button">Submit</string>
+    <string name="ok"> vào lúc </string>
 
 </resources>

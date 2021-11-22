@@ -21,9 +21,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AddLocation extends AppCompatActivity {
     private static final int PICK_FROM_GALLERY = 2;
@@ -39,6 +41,8 @@ public class AddLocation extends AppCompatActivity {
 
     locationDAO mDAO;
     locationImageDAO mImageDAO;
+
+
 
     final static int REQUEST_GET_IMAGE=10;
 
@@ -138,6 +142,9 @@ public class AddLocation extends AppCompatActivity {
         location.setmUrls(urls);
         location.setmPhone(phone.getText().toString());
         location.setmEmail(email.getText().toString());
+        location.setUserEmail(MyGlobal.userEmail);
+        location.setUserName(MyGlobal.userName);
+        location.setDate(new Date());
 
         mDAO.addLocation(location);
         finish();
@@ -209,6 +216,8 @@ public class AddLocation extends AppCompatActivity {
 
         mDAO=new locationDAO(this);
         mImageDAO=new locationImageDAO(this, this);
+
+
 
         latlngView=(TextView) findViewById(R.id.latlng);
     }

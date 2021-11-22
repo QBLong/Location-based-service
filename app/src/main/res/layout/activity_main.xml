@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <!-- <Button
         android:layout_width="wrap_content"
@@ -18,7 +18,10 @@
         android:layout_height="match_parent"
         android:id="@+id/location_list"
         android:background="@color/green"/> -->
-
+    <com.google.android.gms.common.SignInButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sign_in_button"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,4 +32,5 @@
         android:layout_height="wrap_content"
         android:id="@+id/see_locations"
         android:text="@string/see_locations"/>
+
 </LinearLayout>
