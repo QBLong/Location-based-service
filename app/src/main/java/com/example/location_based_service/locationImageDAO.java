@@ -4,6 +4,8 @@ import android.app.Activity;
 
 import android.content.Context;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 
 
@@ -18,16 +20,26 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 
 
 public class locationImageDAO {
     AddLocation mParent;
     FirebaseStorage storage;
     StorageReference storageRef;
-    public locationImageDAO(AddLocation parent){
+    Activity mActivity;
+
+    public locationImageDAO(AddLocation parent, Activity activity){
         mParent=parent;
+        mActivity=activity;
         storage=FirebaseStorage.getInstance("gs://database-firebase-8d08c.appspot.com");
         storageRef=storage.getReference();
+    }
+
+    public interface ImageStatus{
+        void ImageIsLoaded(Bitmap bmp);
     }
 
     void uploadToFirebase(Uri uri, int i, String locationName){
@@ -62,5 +74,36 @@ public class locationImageDAO {
                     }
                 }
         );
+    }
+
+    void downloadFile(String src, ImageStatus status){
+        new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+
+                            try {
+                                java.net.URL url = new java.net.URL(src);
+                                HttpURLConnection connection = (HttpURLConnection) url
+                                        .openConnection();
+                                connection.setDoInput(true);
+                                connection.connect();
+                                InputStream input = connection.getInputStream();
+                                Bitmap bitmap=BitmapFactory.decodeStream(input);
+                                mActivity.runOnUiThread(
+                                        new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                status.ImageIsLoaded(bitmap);
+                                            }
+                                        }
+                                );
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    }
+        ).start();
     }
 }

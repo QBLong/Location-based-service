@@ -4,6 +4,9 @@ package com.example.location_based_service;
 import android.content.Context;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,11 +24,21 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
     private LayoutInflater mInflater;
     private List<cLocation> mLocations;
     private Context mContext;
+    // private DownloadImageTask downloadImageTask;
+
+    public void setmImages(List<Bitmap> mImages) {
+        this.mImages = mImages;
+    }
+
+    private  List<Bitmap> mImages;
     public LocationListAdapter(Context context) {
         mContext=context;
         mInflater=LayoutInflater.from(context);
 
         mLocations=new ArrayList<>();
+        mImages=new ArrayList<>();
+        // downloadImageTask=new DownloadImageTask(null);
+
     }
 
     @NonNull
@@ -41,7 +55,8 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
             holder.nameView.setText(location.getmName());
             holder.starView.setText(String.valueOf(location.getmNumberOfStar())+"/5");
 
-            new DownloadImageTask(holder.imageView).execute(location.mUrls.get(0));
+            if(mImages.size()>position) holder.imageView.setImageBitmap(mImages.get(position));
+
 
 
             holder.itemView.setOnClickListener(
@@ -57,6 +72,13 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
 
     private void processItemClick(cLocation location) {
         Intent intent=new Intent(mContext, Detail_location.class);
+        intent.putExtra("Detail", location.getmDetail());
+        intent.putExtra("Email", location.getmEmail());
+        intent.putExtra("Phone", location.getmPhone());
+        intent.putExtra("image", location.getmImageID());
+        intent.putStringArrayListExtra("urls", location.mUrls);
+        intent.putExtra("Detail", location.getmDetail());
+
         mContext.startActivity(intent);
     }
 

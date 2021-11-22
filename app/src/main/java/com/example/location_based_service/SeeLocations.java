@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.widget.ImageView;
 
 import java.util.List;
 
@@ -33,7 +36,7 @@ public class SeeLocations extends AppCompatActivity {
     }
 
     private void generateGlobalVariables() {
-        mDAO=new locationDAO();
+        mDAO=new locationDAO(this);
         recyclerView=(RecyclerView) findViewById(R.id.location_list);
         adapter=new LocationListAdapter(this);
         recyclerView.setAdapter(adapter);
@@ -41,7 +44,7 @@ public class SeeLocations extends AppCompatActivity {
     }
 
     private void readData() {
-        new locationDAO().readData(
+        mDAO.readData(
                 new locationDAO.DataStatus() {
                     @Override
                     public void DataIsLoaded(List<cLocation> locations, List<String> keys) {
@@ -55,8 +58,9 @@ public class SeeLocations extends AppCompatActivity {
                     }
 
                     @Override
-                    public void DataIsUpdated() {
-
+                    public void DataIsUpdated(List<Bitmap> bitmaps) {
+                        adapter.setmImages(bitmaps);
+                        adapter.notifyDataSetChanged();
                     }
 
                     @Override

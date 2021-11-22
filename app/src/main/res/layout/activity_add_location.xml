@@ -20,6 +20,24 @@
             android:layout_height="wrap_content"
             android:lines="1"
             android:id="@+id/location_name"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/choosePos"
+                android:text="@string/choose_pos"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/latlng"/>
+        </LinearLayout>
+
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,7 +50,17 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/add_more_image"
+            android:hint="@string/enter_your_phone_number"
+            android:id="@+id/phone"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_your_email_address"
+            android:id="@+id/email"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_your_review_here"
             android:id="@+id/text_comment" />
         <Button
             android:layout_width="wrap_content"

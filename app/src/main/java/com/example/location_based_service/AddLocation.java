@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -26,12 +27,12 @@ import java.util.ArrayList;
 
 public class AddLocation extends AppCompatActivity {
     private static final int PICK_FROM_GALLERY = 2;
-    Button addMoreImage, submit;
+    private static final int GET_LATLNG = 3;
+    Button addMoreImage, submit, choosePos;
     RecyclerView displayImagesView;
-    ArrayList<Bitmap> images;
     LocationImageAdapter adapter;
-    TextView locationName;
-    EditText comment;
+    TextView locationName, latlngView;
+    EditText comment, phone, email;
     LatLng position;
     ArrayList<Uri> uris;
     public ArrayList<String>urls;
@@ -47,7 +48,16 @@ public class AddLocation extends AppCompatActivity {
         setContentView(R.layout.activity_add_location);
 
         assignGlobalVariables();
-        position=new LatLng(10.765024016757133, 106.68225066700836);
+        choosePos.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent choosePosIntent=new Intent(AddLocation.this, MapsActivity.class);
+                        choosePosIntent.putExtra("do", "choosePos");
+                        startActivityForResult(choosePosIntent, GET_LATLNG);
+                    }
+                }
+        );
 
         addMoreImage.setOnClickListener(
                 new View.OnClickListener() {
@@ -58,8 +68,8 @@ public class AddLocation extends AppCompatActivity {
                 }
         );
 
-        adapter=new LocationImageAdapter(this);
-        adapter.setmImages(images);
+        adapter=new LocationImageAdapter(this, R.layout.item_image_layout);
+        adapter.setmUriImages(uris);
         displayImagesView.setAdapter(adapter);
         displayImagesView.setLayoutManager(new GridLayoutManager(this, 2));
 
@@ -67,30 +77,68 @@ public class AddLocation extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                        for(int i=0;i<images.size();i++){
-                            mImageDAO.uploadToFirebase(uris.get(i), i, locationName.getText().toString());
+                        if(check()){
+                            for(int i=0;i<uris.size();i++){
+                                mImageDAO.uploadToFirebase(uris.get(i), i, locationName.getText().toString());
+                            }
                         }
                     }
                 }
         );
     }
 
+    private boolean check() {
+        System.out.println("called");
+        String name=locationName.getText().toString();
+        if(name.length()==0){
+            System.out.println("name");
+            Toast.makeText(
+                    AddLocation.this, "Please enter location name", Toast.LENGTH_LONG
+            ).show();
+            return false;
+        }
+        String commentt=comment.getText().toString();
+        if(commentt.length()==0){
+            Toast.makeText(
+                    AddLocation.this, "Please enter your review", Toast.LENGTH_LONG
+            ).show();
+            return false;
+        }
+        if(position==null){
+            Toast.makeText(
+                    AddLocation.this, "Please mark your location", Toast.LENGTH_LONG
+            ).show();
+            return false;
+        }
+        if(uris.size()==0){
+            Toast.makeText(
+                    AddLocation.this, "Must have at least 1 image", Toast.LENGTH_LONG
+            ).show();
+            return false;
+        }
+        return true;
+    }
+
     public void setUrls(String url, int i){
         urls.add(url);
-        if(urls.size()==images.size()){
+        if(urls.size()==uris.size()){
             submitToDatabase();
         }
     }
+
+
 
     private void submitToDatabase() {
         cLocation location=new cLocation();
         location.setmName(locationName.getText().toString());
         location.setmNumberOfStar(5);
-        location.setComment(comment.getText().toString());
+        location.setmDetail(comment.getText().toString());
         location.setLattitude(position.latitude);
         location.setLongitude(position.longitude);
         location.setmUrls(urls);
+        location.setmPhone(phone.getText().toString());
+        location.setmEmail(email.getText().toString());
+
         mDAO.addLocation(location);
         finish();
     }
@@ -118,11 +166,10 @@ public class AddLocation extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case PICK_FROM_GALLERY:
-                // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     getImage2();
                 } else {
-                    //do something like displaying a message that he didn`t allow the app to access gallery and you wont be able to let him select from gallery
+
                 }
                 break;
         }
@@ -134,32 +181,36 @@ public class AddLocation extends AppCompatActivity {
         if(requestCode==PICK_FROM_GALLERY && resultCode==RESULT_OK){
             Uri imageUri=data.getData();
             if(imageUri!=null){
-                try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-                    images.add(bitmap);
                     uris.add(imageUri);
                     adapter.notifyDataSetChanged();
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
-
+        }
+        else if(requestCode==GET_LATLNG){
+            double lattitude=data.getDoubleExtra("lat", 0);
+            double longitude=data.getDoubleExtra("long", 0);
+            String text=String.valueOf(lattitude)+", "+String.valueOf(longitude);
+            position=new LatLng(lattitude, longitude);
+            latlngView.setText(text);
         }
     }
 
     private void assignGlobalVariables() {
         displayImagesView=(RecyclerView) findViewById(R.id.displayImagesView);
         addMoreImage=(Button) findViewById(R.id.add_more_image);
-        images=new ArrayList<>();
         submit=(Button) findViewById(R.id.submit);
         locationName=(TextView)findViewById(R.id.location_name);
         comment=(EditText)findViewById(R.id.text_comment);
         uris=new ArrayList<>();
         urls=new ArrayList<>();
+        choosePos=(Button) findViewById(R.id.choosePos);
+        position=null;
+        phone=(EditText) findViewById(R.id.phone);
+        email=(EditText) findViewById(R.id.email);
 
-        mDAO=new locationDAO();
-        mImageDAO=new locationImageDAO(this);
+        mDAO=new locationDAO(this);
+        mImageDAO=new locationImageDAO(this, this);
+
+        latlngView=(TextView) findViewById(R.id.latlng);
     }
 
 

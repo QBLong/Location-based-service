@@ -15,6 +15,10 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         this.bmImage = bmImage;
     }
 
+    public void setBmImage(ImageView bmImage) {
+        this.bmImage = bmImage;
+    }
+
     protected Bitmap doInBackground(String... urls) {
         if(urls[0]==null) return null;
         String urldisplay = urls[0];

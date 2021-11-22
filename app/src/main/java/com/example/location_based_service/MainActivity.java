@@ -7,11 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
-    TextView addLocation, seeLocations;
+    Button addLocation, seeLocations;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent addLocationIntent = new Intent(MainActivity.this, AddLocation.class);
+                addLocationIntent.putExtra("do", "choosePos");
                 startActivity(addLocationIntent);
             }
         });
@@ -37,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void assignGlobalVariables() {
-        addLocation = (TextView) findViewById(R.id.add_location);
-        seeLocations = (TextView) findViewById(R.id.see_locations);
+        addLocation = (Button) findViewById(R.id.add_location);
+        seeLocations = (Button) findViewById(R.id.see_locations);
     }
 }
 
