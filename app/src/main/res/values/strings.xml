@@ -2,4 +2,23 @@
     <string name="app_name">Location-based-service</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="mapbox_token">sk.eyJ1IjoibG9uZ3F1YWNoIiwiYSI6ImNrdzdnYmI5MTB6a2oycHFsZGtlZGg5NmcifQ.AV0NdKix9gvLWWXtzdYZJA</string>
+    <string name="detail">VNUHCM-University of Science has been serving as a pioneer in offering various scientific degrees across Southern Vietnam since its original establishment as the Indochina College of Science in 1941. VNUHCM-US was re-founded in March 1996 following a split from Đại học Tổng hợp
+    VNUHCM-University of Science has been serving as a pioneer in offering various scientific degrees across Southern Vietnam since its original establishment as the Indochina College of Science in 1941. VNUHCM-US was re-founded in March 1996 following a split from Đại học Tổng hợp</string>
+    <string name="feature_in4">Mô tả</string>
+    <string name="feature_contact">Liên hệ</string>
+    <string name="feature_comment">Bình luận</string>
+    <string name="add_location">Add a location</string>
+    <string name="see_locations">See all locations</string>
+    <string name="add_more_image">Add more image</string>
+    <string name="location_name">Location name:</string>
+    <string name="submit">submit</string>
+    <string name="choose_pos">Chọn địa điểm trên bản đồ</string>
+    <string name="enter_your_review_here">Enter your review here</string>
+    <string name="enter_your_phone_number">Enter your phone number</string>
+    <string name="enter_your_email_address">Enter your email address</string>
+    <string name="writer_information">Writer information</string>
+    <string name="enter_your_comment">Enter your comment</string>
+    <string name="number_of_star">Number of star:</string>
+    <string name="submit_button">Submit</string>
+    <string name="ok"> vào lúc </string>
 </resources>
