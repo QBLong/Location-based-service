@@ -55,6 +55,7 @@
             android:src="@drawable/chat" />
 
         <ImageButton
+            android:id="@+id/direct"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="50dp"
@@ -75,7 +76,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18pt"
+                android:id="@+id/mainName" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -121,7 +127,38 @@
                 android:text="@string/feature_comment"
                 android:textSize="15pt"
                 android:textStyle="bold" />
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:rowCount="2"
+                android:columnCount="2">
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Tên"/>
 
+                <EditText
+                    android:layout_width="300dp"
+                    android:layout_height="20dp"
+                    android:background="@color/white"/>
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Nội dung"/>
+
+                <EditText
+                    android:layout_width="500dp"
+                    android:layout_height="40dp"
+                    android:background="@color/white"/>
+            </GridLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:text="Comment" />
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </ScrollView>
 

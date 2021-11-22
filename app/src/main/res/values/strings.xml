@@ -9,5 +9,6 @@
     <string name="feature_in4">Mô tả</string>
     <string name="feature_contact">Liên hệ</string>
     <string name="feature_comment">Bình luận</string>
-
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="mapbox_token">sk.eyJ1IjoibG9uZ3F1YWNoIiwiYSI6ImNrdzdnYmI5MTB6a2oycHFsZGtlZGg5NmcifQ.AV0NdKix9gvLWWXtzdYZJA</string>
 </resources>

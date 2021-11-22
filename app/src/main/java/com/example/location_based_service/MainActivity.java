@@ -56,12 +56,11 @@ public class MainActivity extends AppCompatActivity {
             res[i].setmPhone(CphoneNo[i]);
             res[i].setmDetail(Cdetail[i]);
             res[i].setmNumberOfStar(5);
+            res[i].setmCoop(Ccoop[i]);
             Bitmap bmp= BitmapFactory.decodeResource(getResources(), CimageId[i]);
             res[i].setmImage(bmp);
         }
         return res;
     }
 
-    public void onClick(View view) {
-    }
 }

@@ -59,11 +59,12 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
 
     private void processItemClick(cLocation location) {
         Intent intent=new Intent(mContext, Detail_location.class);
+        intent.putExtra("Name", location.getmName());
         intent.putExtra("Detail", location.getmDetail());
         intent.putExtra("Email", location.getmEmail());
         intent.putExtra("Phone", location.getmPhone());
         intent.putExtra("image", location.getmImageID());
-
+        intent.putExtra("coop", location.getmCoop());
         mContext.startActivity(intent);
     }
 

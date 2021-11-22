@@ -21,9 +21,8 @@ public class cLocation  {
         mPhone="";
         mEmail="";
         mComment=null;
-        mCoop=null;
+        mCoop=new double[2];
     }
-
     public String getmName(){ return mName;}
     public String getmDetail(){ return mDetail;}
     public String getmPhone(){ return mPhone;}
@@ -39,5 +38,6 @@ public class cLocation  {
     public void setmNumberOfStar(float numberOfStar){ mNumberOfStar=numberOfStar;}
     public Bitmap getmImage(){return mImage;}
     public void setmImage(Bitmap image){mImage=image;}
+    public void setmCoop(double[] coop){mCoop[0]=coop[0];mCoop[1]=coop[1];}
 
 }
