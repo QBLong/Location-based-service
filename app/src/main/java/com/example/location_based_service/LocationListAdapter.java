@@ -54,6 +54,7 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
             cLocation location=mLocations.get(position);
             holder.nameView.setText(location.getmName());
             float star=(float)location.getmNumberOfStar()/ location.getmNumberOfVote();
+            star=Math.round(star*100.0f)/100.0f;
 
             holder.starView.setText(String.valueOf(star)+"/5");
 

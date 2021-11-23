@@ -113,8 +113,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 TextView tv1 = (TextView) v.findViewById(R.id.textView1);
                 TextView tv2 = (TextView) v.findViewById(R.id.textView2);
-                String title = marker.getTitle();
-                String informations = marker.getSnippet();
+                String title = locationName;
+                String informations = locationDescription;
 
                 tv1.setText(title);
                 tv2.setText(informations);

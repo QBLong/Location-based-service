@@ -221,7 +221,7 @@ public class Detail_location extends AppCompatActivity {
         openMapIntent.putExtra("lattitude", lattitude);
         openMapIntent.putExtra("longitude", longitude);
         openMapIntent.putExtra("name", locationName);
-        openMapIntent.putExtra("description", tDetail.getText());
+        openMapIntent.putExtra("description", tDetail.getText().toString());
         startActivity(openMapIntent);
     }
 }

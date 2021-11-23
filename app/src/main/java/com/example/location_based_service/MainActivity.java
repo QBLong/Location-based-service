@@ -38,8 +38,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         assignGlobalVariables();
 
-        MyGlobal.userEmail="Minhbaodinh0808@gmail.com";
-        MyGlobal.userName="Minh Bao Dinh";
+        // Nếu thầy sử dụng máy ảo và không login vào được thì un comment 2 dòng này
+        // Máy android thật thì vô như bình thường
+        // Cái cơ chế authentication của Firebase em không hiểu lắm
+
+        // MyGlobal.userEmail="Minhbaodinh0808@gmail.com";
+        // MyGlobal.userName="Minh Bao Dinh";
 
         addLocation.setOnClickListener(new View.OnClickListener() {
             @Override

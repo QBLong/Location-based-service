@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ReadCommentActivity"
-    android:id="@+id/commentViewRecycler">
+    android:id="@+id/commentViewRecycler"
+    android:background="@color/teal_200">
 
 </androidx.recyclerview.widget.RecyclerView>
