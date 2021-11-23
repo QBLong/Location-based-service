@@ -1,10 +1,5 @@
 package com.example.location_based_service;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentActivity;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -13,10 +8,14 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+
+import com.example.location_based_service.databinding.ActivityMapsBinding;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,7 +26,6 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.example.location_based_service.databinding.ActivityMapsBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -105,15 +103,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         findYourPosition();
 
-        /* mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Nullable
             @Override
             public View getInfoContents(@NonNull Marker marker) {
-                View v = getLayoutInflater().inflate(R.layout., null);
+                View v = getLayoutInflater().inflate(R.layout.infowindow_layout, null);
 
                 LatLng latLng = marker.getPosition();
 
-                ImageView im = (ImageView) v.findViewById(R.id.imageView1);
                 TextView tv1 = (TextView) v.findViewById(R.id.textView1);
                 TextView tv2 = (TextView) v.findViewById(R.id.textView2);
                 String title = marker.getTitle();
@@ -126,8 +123,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return v;
             }
 
+            @Nullable
+            @Override
+            public View getInfoWindow(@NonNull Marker marker) {
+                return null;
+            }
 
-        });*/
+
+        });
 
 
     }
