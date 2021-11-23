@@ -169,9 +169,6 @@ public class Detail_location extends AppCompatActivity {
     }
 
     private void processComment() {
-        Toast.makeText(
-                Detail_location.this, "Clicked", Toast.LENGTH_LONG
-        ).show();
         Intent intent=new Intent(Detail_location.this, AddCommentActivity.class);
         intent.putExtra("locationName", locationName);
         startActivity(intent);
